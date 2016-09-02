@@ -2,25 +2,19 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class GameSnake {
+public class App {
 
     // заголовки окна:
-    final static String PROGRAM_TITLE = "Classic Game Snake";
+    private final static String PROGRAM_TITLE = "Classic App Snake";
     private final static String PROGRAM_OVER_TITLE = "GAME OVER!";
 
-    // коды клавиш:
-    final static int LEFT = 37;
-    final static int RIGHT = 39;
-    final static int UP = 40;
-    final static int DOWN = 38;
-
     // параметры поля:
-    final static int POINT_RADIUS = 20;
     final static int AREA_WIDTH = 30;
     final static int AREA_HEIGHT = 20;
-    final static boolean CYCLE_AREA = true;
     private final static int AREA_DX = 6;
     private final static int AREA_DY = 28;
+
+    // задержка отображения:
     private final static int SHOW_DELAY = 150;
 
     // параметры змеи:
@@ -28,7 +22,7 @@ public class GameSnake {
     private final static int START_SNAKE_LENGTH = 6;
     private final static int START_SNAKE_X = 10;
     private final static int START_SNAKE_Y = 10;
-    private final static int START_DIRECTION = RIGHT;
+    private final static int START_DIRECTION = Point.RIGHT;
 
     // служебные переменные:
     private Garden garden;
@@ -38,7 +32,7 @@ public class GameSnake {
     private boolean start = true;
 
     public static void main( String[] args ) {
-        new GameSnake().init();
+        new App().init();
     }
 
     private void init() {
@@ -49,8 +43,8 @@ public class GameSnake {
         frame.get().setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         // устанавливаем размеры окна:
         frame.get().setSize(
-                AREA_WIDTH * POINT_RADIUS + AREA_DX,
-                AREA_HEIGHT * POINT_RADIUS + AREA_DY
+                AREA_WIDTH * Point.RADIUS + AREA_DX,
+                AREA_HEIGHT * Point.RADIUS + AREA_DY
         );
         // стартовое положение змеи:
         frame.get().setLocation( START_LOCATION, START_LOCATION );

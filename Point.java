@@ -3,10 +3,23 @@ import java.util.Random;
 
 class Point {
 
+    // коды клавиш:
+    final static int RIGHT = 39;
+    private final static int LEFT = 37;
+    private final static int UP = 40;
+    private final static int DOWN = 38;
+
+    // настройки цикличности:
+    private final static boolean CYCLE_AREA = true;
+
+    // размеры точки:
+    final static int RADIUS = 20;
+
     // цветовые параметры:
     private final static Color COLOR_BODY = Color.black;
     private final static Color COLOR_FOOD = Color.green;
     private final static Color COLOR_POISON = Color.red;
+
     // писать ли лог:
     private final static boolean WRITE_LOG = false;
 
@@ -18,25 +31,25 @@ class Point {
         int x = point.getX();
         int y = point.getY();
         this.log( "BEFORE: X: " + x + " Y: " + y );
-        if( direction == GameSnake.LEFT ) { this.log( "LEFT!" ); x--; }
-        if( direction == GameSnake.RIGHT ) { this.log( "RIGHT!" ); x++; }
-        if( direction == GameSnake.DOWN ) { this.log( "DOWN!" ); y--; }
-        if( direction == GameSnake.UP ) { this.log( "UP!" ); y++; }
-        if( x > GameSnake.AREA_WIDTH - 1 ) {
-            if( !GameSnake.CYCLE_AREA ) snake.stop();
+        if( direction == LEFT ) { this.log( "LEFT!" ); x--; }
+        if( direction == RIGHT ) { this.log( "RIGHT!" ); x++; }
+        if( direction == DOWN ) { this.log( "DOWN!" ); y--; }
+        if( direction == UP ) { this.log( "UP!" ); y++; }
+        if( x > App.AREA_WIDTH - 1 ) {
+            if( !CYCLE_AREA ) snake.stop();
             x = 0;
         }
         if( x < 0 ) {
-            if( !GameSnake.CYCLE_AREA ) snake.stop();
-            x = GameSnake.AREA_WIDTH - 1;
+            if( !CYCLE_AREA ) snake.stop();
+            x = App.AREA_WIDTH - 1;
         }
-        if( y > GameSnake.AREA_HEIGHT - 1 ) {
-            if( !GameSnake.CYCLE_AREA ) snake.stop();
+        if( y > App.AREA_HEIGHT - 1 ) {
+            if( !CYCLE_AREA ) snake.stop();
             y = 0;
         }
         if( y < 0 ) {
-            if( !GameSnake.CYCLE_AREA ) snake.stop();
-            y = GameSnake.AREA_HEIGHT - 1;
+            if( !CYCLE_AREA ) snake.stop();
+            y = App.AREA_HEIGHT - 1;
         }
         this.set( x, y );
         this.check( snake );
@@ -61,12 +74,7 @@ class Point {
         // устанавливаем цвет точки:
         g.setColor( color );
         // рисуем точку в виде закрашенного круга:
-        g.fillOval(
-            x * GameSnake.POINT_RADIUS,
-            y * GameSnake.POINT_RADIUS,
-            GameSnake.POINT_RADIUS,
-            GameSnake.POINT_RADIUS
-        );
+        g.fillOval( x * RADIUS, y * RADIUS, RADIUS, RADIUS );
     }
 
     private void set( int x, int y ) {
@@ -80,8 +88,8 @@ class Point {
 
     private void grow() {
         Random random = new Random();
-        int x = random.nextInt( GameSnake.AREA_WIDTH - 1 );
-        int y = random.nextInt( GameSnake.AREA_HEIGHT - 1 );
+        int x = random.nextInt( App.AREA_WIDTH - 1 );
+        int y = random.nextInt( App.AREA_HEIGHT - 1 );
         set( x, y );
     }
 
