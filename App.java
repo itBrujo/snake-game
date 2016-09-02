@@ -5,8 +5,8 @@ import javax.swing.*;
 public class App {
 
     // заголовки окна:
-    private final static String PROGRAM_TITLE = "Classic App Snake";
-    private final static String PROGRAM_OVER_TITLE = "GAME OVER!";
+    final static String TITLE = "Classic Game Snake";
+    private final static String OVER_TITLE = "GAME OVER!";
 
     // параметры поля:
     final static int AREA_WIDTH = 30;
@@ -38,13 +38,13 @@ public class App {
     private void init() {
 
         // создаём новое окно:
-        frame.set(new JFrame(PROGRAM_TITLE + " : " + START_SNAKE_LENGTH));
+        frame.set( new JFrame( TITLE + " : " + START_SNAKE_LENGTH ) );
         // устанавливаем закрытие окна при нажатии на крестик окна:
         frame.get().setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         // устанавливаем размеры окна:
         frame.get().setSize(
-                AREA_WIDTH * Point.RADIUS + AREA_DX,
-                AREA_HEIGHT * Point.RADIUS + AREA_DY
+            AREA_WIDTH * Point.RADIUS + AREA_DX,
+            AREA_HEIGHT * Point.RADIUS + AREA_DY
         );
         // стартовое положение змеи:
         frame.get().setLocation( START_LOCATION, START_LOCATION );
@@ -67,17 +67,17 @@ public class App {
         });
         // устанавливаем видимость экрана:
         frame.get().setVisible( true );
+        // цикл запуска и перезапуска игры:
         do {
             if( start ) game();
-            delay();
-        } while( true );
+        } while( delay() );
     }
 
     private void game() {
         // игра начинается:
         start = false;
         boolean gameOver = false;
-        frame.get().setTitle( PROGRAM_TITLE + " : " + START_SNAKE_LENGTH );
+        frame.get().setTitle( TITLE + " : " + START_SNAKE_LENGTH );
         // создаём змейку:
         snake = new Snake( START_SNAKE_X, START_SNAKE_Y, START_SNAKE_LENGTH, START_DIRECTION );
         // создаём сад:
@@ -88,24 +88,26 @@ public class App {
             delay();
             garden.grow();
             snake.move();
-            gameOver = !snake.live( garden, frame.get());
+            gameOver = !snake.live( garden, frame.get() );
         }
-        frame.get().setTitle( PROGRAM_OVER_TITLE );
+        frame.get().setTitle( OVER_TITLE );
     }
 
-    private void delay() {
+    private boolean delay() {
         try {
             Thread.sleep( SHOW_DELAY );
+            return true;
         } catch ( InterruptedException e ) {
             e.printStackTrace();
         }
+        return false;
     }
 
     private class Canvas extends JPanel {
         @Override
         public void paint( Graphics g ) {
-            super.paint(g);
-            garden.paint(g);
+            super.paint( g );
+            garden.paint( g );
         }
     }
 

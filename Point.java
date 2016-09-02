@@ -4,10 +4,10 @@ import java.util.Random;
 class Point {
 
     // коды клавиш:
+    final static int LEFT = 37;
+    final static int DOWN = 38;
     final static int RIGHT = 39;
-    private final static int LEFT = 37;
-    private final static int UP = 40;
-    private final static int DOWN = 38;
+    final static int UP = 40;
 
     // настройки цикличности:
     private final static boolean CYCLE_AREA = true;

@@ -18,16 +18,16 @@ class Snake {
 
     // меняем направление движения змеи:
     void setDirection( int dir ) {
-        if( dir < GameSnake.LEFT || dir > GameSnake.UP ) return;
-        if( dir == GameSnake.LEFT && direction == GameSnake.RIGHT ) return;
-        if( dir == GameSnake.RIGHT && direction == GameSnake.LEFT ) return;
-        if( dir == GameSnake.UP && direction == GameSnake.DOWN ) return;
-        if( dir == GameSnake.DOWN && direction == GameSnake.UP ) return;
+        if( dir < Point.LEFT || dir > Point.UP ) return;
+        if( dir == Point.LEFT && direction == Point.RIGHT ) return;
+        if( dir == Point.RIGHT && direction == Point.LEFT ) return;
+        if( dir == Point.UP && direction == Point.DOWN ) return;
+        if( dir == Point.DOWN && direction == Point.UP ) return;
         direction = dir;
     }
 
     // метод рисования объекта:
-    void paint(Graphics g) {
+    void paint( Graphics g ) {
         // перебираем элементы объекта в цикле:
         for( Point point: snake ) {
             point.paint( g );
@@ -38,7 +38,7 @@ class Snake {
     boolean live( Garden garden, JFrame frame ) {
         if( !live ) { snake.remove(0); return live; }
         if( garden.feed() ) {
-            frame.setTitle( GameSnake.PROGRAM_TITLE + " : " + snake.size() );
+            frame.setTitle( App.TITLE + " : " + snake.size() );
         } else {
             snake.remove( snake.size() - 1 );
         }
