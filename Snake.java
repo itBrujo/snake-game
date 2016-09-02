@@ -8,8 +8,11 @@ class Snake {
 
     // конструктор змеи:
     Snake( int x, int y, int length, int direction ) {
-        snake.add( 0, new Point( x, y ) );
+        // начальное направлени движения:
         this.direction = direction;
+        // голова змейки:
+        snake.add( 0, new Point( x, y ) );
+        // змейка выползает из норы :)
         for( int i = 0; i < length; i++ ) move();
     }
 

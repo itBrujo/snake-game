@@ -5,7 +5,7 @@ import java.util.ArrayList;
 class Garden {
 
     // конструктор сада:
-    Garden(Snake snake, JFrame frame ) {
+    Garden( Snake snake, JFrame frame ) {
         this.frame = frame;
         this.snake = snake;
         this.food = get( true );
