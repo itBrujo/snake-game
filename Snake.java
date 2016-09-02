@@ -35,13 +35,10 @@ class Snake {
     }
 
     // решаем вопросы питания, жизни и смерти :)
-    boolean live( Garden garden, JFrame frame ) {
+    boolean live( Garden garden ) {
         if( !live ) { snake.remove(0); return live; }
-        if( garden.feed() ) {
-            frame.setTitle( App.TITLE + " : " + snake.size() );
-        } else {
+        if( !garden.feed() )
             snake.remove( snake.size() - 1 );
-        }
         return live;
     }
 
@@ -52,9 +49,9 @@ class Snake {
     }
 
     // получаем голову змейки
-    Point head() {
-        return snake.get(0);
-    }
+    Point head() { return snake.get(0); }
+
+    int length() { return snake.size(); }
 
     // проверяем - является ли точка телом змейки:
     boolean isBody( Point check ) {

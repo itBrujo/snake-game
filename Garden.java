@@ -1,10 +1,12 @@
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 class Garden {
 
     // конструктор сада:
-    Garden( Snake snake ) {
+    Garden( Snake snake, JFrame frame ) {
+        this.frame = frame;
         this.snake = snake;
         this.food = get( true );
         cycle = 0;
@@ -12,6 +14,7 @@ class Garden {
 
     private final static int CYCLE_LENGTH = 3;
 
+    private JFrame frame;
     private Snake snake;
     private int cycle;
     private Point food = new Point( true );
@@ -41,9 +44,10 @@ class Garden {
         danger.add( get( false ) );
     }
 
-    // появляется новая еда:
+    // змея растёт и появляется новая еда:
     private void eat() {
         cycle++;
+        frame.setTitle( App.TITLE + " : " + snake.length() );
         food = get( true );
     }
 
