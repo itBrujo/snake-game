@@ -25,10 +25,10 @@ public class App {
     private final static int START_DIRECTION = Point.RIGHT;
 
     // служебные переменные:
-    private Garden garden;
-    private Snake snake;
     private final ThreadLocal<JFrame> frame = new ThreadLocal<>();
     private Canvas canvasPanel;
+    private Garden garden;
+    private Snake snake;
     private boolean start = true;
 
     public static void main( String[] args ) {
@@ -81,14 +81,14 @@ public class App {
         // создаём змейку:
         snake = new Snake( START_SNAKE_X, START_SNAKE_Y, START_SNAKE_LENGTH, START_DIRECTION );
         // создаём сад:
-        garden = new Garden( snake );
+        garden = new Garden( snake, frame.get() );
         // запускаем змейку:
         while( !gameOver ) {
             canvasPanel.repaint();
             delay();
             garden.grow();
             snake.move();
-            gameOver = !snake.live( garden, frame.get() );
+            gameOver = !snake.live( garden );
         }
         frame.get().setTitle( OVER_TITLE );
     }
