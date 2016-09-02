@@ -31,6 +31,7 @@ public class App {
     private Garden garden;
     private Snake snake;
     private boolean start = true;
+    private boolean gameOver;
 
     public static void main( String[] args ) {
         new App().init();
@@ -77,7 +78,7 @@ public class App {
     private void game() {
         // игра начинается:
         start = false;
-        boolean gameOver = false;
+        gameOver = false;
         frame.get().setTitle( TITLE + " : " + START_SNAKE_LENGTH );
         // создаём змейку:
         snake = new Snake( START_SNAKE_X, START_SNAKE_Y, START_SNAKE_LENGTH, START_DIRECTION );
@@ -85,13 +86,12 @@ public class App {
         garden = new Garden( snake, frame.get() );
         // запускаем змейку:
         while( !gameOver ) {
-            canvasPanel.repaint();
             delay();
             garden.grow();
             snake.move();
             gameOver = !snake.live( garden );
+            canvasPanel.repaint();
         }
-        frame.get().setTitle( OVER_TITLE );
     }
 
     private boolean delay() {
@@ -109,6 +109,16 @@ public class App {
         public void paint( Graphics g ) {
             super.paint( g );
             garden.paint( g );
+            if( gameOver ) {
+                g.setColor( Color.red );
+                g.setFont( new Font("Arial", Font.BOLD, 40 ) );
+                FontMetrics fm = g.getFontMetrics();
+                g.drawString(
+                    OVER_TITLE,
+                    ( AREA_WIDTH * Point.RADIUS + AREA_DX - fm.stringWidth( OVER_TITLE ) )/2,
+                    ( AREA_HEIGHT * Point.RADIUS + AREA_DY )/2
+                );
+            }
         }
     }
 
