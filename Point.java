@@ -20,21 +20,19 @@ class Point {
     private final static Color COLOR_FOOD = Color.green;
     private final static Color COLOR_POISON = Color.red;
 
-    // писать ли лог:
-    private final static boolean WRITE_LOG = false;
-
+    // параметры точки:
     private int x, y;
     private Color color = COLOR_BODY;
 
     // конструктор для растущей змейки:
-    Point(Point point, int direction, Snake snake ) {
-        int x = point.getX();
-        int y = point.getY();
-        this.log( "BEFORE: X: " + x + " Y: " + y );
-        if( direction == LEFT ) { this.log( "LEFT!" ); x--; }
-        if( direction == RIGHT ) { this.log( "RIGHT!" ); x++; }
-        if( direction == DOWN ) { this.log( "DOWN!" ); y--; }
-        if( direction == UP ) { this.log( "UP!" ); y++; }
+    Point( Snake snake ) {
+        int direction = snake.getDirection();
+        int x = snake.head().getX();
+        int y = snake.head().getY();
+        if( direction == LEFT ) x--;
+        if( direction == RIGHT ) x++;
+        if( direction == DOWN ) y--;
+        if( direction == UP ) y++;
         if( x > App.AREA_WIDTH - 1 ) {
             if( !CYCLE_AREA ) snake.stop();
             x = 0;
@@ -53,7 +51,6 @@ class Point {
         }
         this.set( x, y );
         this.check( snake );
-        this.log( "X: " + x + " Y: " + y);
     }
 
     // конструктор для сада:
@@ -106,10 +103,5 @@ class Point {
     private int getX() { return x; }
 
     private int getY() { return y; }
-
-    private void log( String mess ) {
-        if(WRITE_LOG)
-            System.out.print( mess + "\n" );
-    }
 
 }

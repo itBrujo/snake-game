@@ -44,8 +44,8 @@ class Snake {
 
     // змейка ползёт :)
     void move() {
-        // добавляем новую точку со смещением обязательно в нулевую позицию коллекции:
-        snake.add( 0, new Point( snake.get(0), direction, this ) );
+        // добавляем новую голову:
+        snake.add( 0, new Point( this ) );
     }
 
     // получаем голову змейки:
@@ -53,6 +53,9 @@ class Snake {
 
     // получаем длину змейки:
     int length() { return snake.size(); }
+
+    // получаем направление движения змейки:
+    int getDirection() { return direction; }
 
     // проверяем - является ли точка телом змейки:
     boolean isBody( Point check ) {
